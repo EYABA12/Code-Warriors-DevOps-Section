@@ -1,0 +1,37 @@
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-codeWarrior
+    environment:
+      MYSQL_ROOT_PASSWORD: pfa2024
+      MYSQL_DATABASE: CodeWarrior
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_dataa:/var/lib/mysql
+    networks:
+      - codeWarriors-networks
+  back-codewarriors:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: back-codewarriors
+    ports:
+      - '8081:8081'
+    networks:
+      - codeWarriors-networks
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/CodeWarrior?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pfa2024
+    depends_on:
+      - mysql
+
+ 
+
+networks:
+  codeWarriors-networks:
+    external: true
+
+volumes:
+  db_dataa:

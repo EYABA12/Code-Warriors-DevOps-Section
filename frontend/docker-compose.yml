@@ -1,0 +1,14 @@
+services:
+  front-codewarriors:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: front-codeWarriors
+    ports:
+      - '4200:80'
+    networks:
+      - codeWarriors-networks
+
+networks:
+  codeWarriors-networks:
+    external: true

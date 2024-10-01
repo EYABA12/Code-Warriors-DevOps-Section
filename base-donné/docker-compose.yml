@@ -1,0 +1,23 @@
+
+services:
+  # MySQL Service
+  mysql-db:
+    image: mysql:8.0 # Version de MySQL
+    container_name: mysql-codeWarrior
+    environment:
+      MYSQL_ROOT_PASSWORD: pfa2024 # Mot de passe root
+      MYSQL_DATABASE: CodeWarrior # Nom de la base de données
+     
+    ports:
+      - '3306:3306' # Port MySQL exposé
+    volumes:
+      - db_dataa:/var/lib/mysql # Volume pour persister les données
+    networks:
+      - codeWarriors-networks
+
+networks:
+  codeWarriors-networks:
+    external: true # Utilisation d'un réseau externe, s'il existe déjà
+
+volumes:
+  db_dataa: # Volume pour stocker les données MySQL
