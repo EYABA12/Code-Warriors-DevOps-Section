@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: back-codewarriors
     ports:
-      - '8081:8081'
+      - '8084:8084'
     networks:
       - codeWarriors-networks
     environment:
