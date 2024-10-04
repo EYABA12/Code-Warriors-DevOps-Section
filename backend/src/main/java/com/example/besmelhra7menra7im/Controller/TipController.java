@@ -12,6 +12,7 @@ import java.util.Optional;
 
 
 
+@CrossOrigin(origins = "*")
 
     @RestController
     @RequestMapping("/api/tips")

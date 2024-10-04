@@ -3,6 +3,7 @@ package com.example.besmelhra7menra7im.Controller;
 import com.example.besmelhra7menra7im.Service.EmailService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+@CrossOrigin(origins = "*")
 
 @RestController
 

@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api/")
 public class RegisterController {
