@@ -15,7 +15,9 @@ public class CrossConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("*")  // Permettre toutes les origines
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true); // Autoriser les cookies si nécessaire
+
             }
         };
     }
