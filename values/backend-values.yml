@@ -2,15 +2,17 @@ appName: back-codewarriors
 appImage: eyabenamor949/code-warriors-backend
 appVersion: latest
 appReplicas: 2
-containerPort: 80
+containerPort: 8081
 containerEnvVars:
   - name: PORT
-    value: "8080"  
+    value: "8084"  
   - name: SPRING_DATASOURCE_URL
     value: "jdbc:mysql://mysql:3306/CodeWarrior?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false"  # URL de connexion à la base de données
   - name: SPRING_DATASOURCE_USERNAME
     value: "root"  # Nom d'utilisateur de la base de données
   - name: SPRING_DATASOURCE_PASSWORD
     value: "pfa2024"  # Mot de passe de la base de données
-servicePort: 8080
+  - name: Front
+    value: "frontend-codewarriors:80"
+servicePort: 8081
 serviceType: ClusterIP

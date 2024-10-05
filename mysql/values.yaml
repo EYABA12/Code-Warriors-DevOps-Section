@@ -3,7 +3,7 @@ appName: mysql
 appImage: mysql
 appVersion: 8.0.39-debian
 appReplicas: 1
-containerPort: 6379
+containerPort: 3306
 volumeName: mysql-data
 containerMountPath: /data
 containerEnvVars:
@@ -11,4 +11,4 @@ containerEnvVars:
     value: "pfa2024"  # Mot de passe root
   - name: MYSQL_DATABASE
     value: "CodeWarrior"  # Nom de la base de données
-servicePort: 6379
+servicePort: 3306
