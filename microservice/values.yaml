@@ -1,10 +1,12 @@
 appName: frontend-codewarriors
-appImage: localhost:8083/front-codewarriors
-appVersion: 70
+appImage: eyabenamor949/code-warriors
+appVersion: latest
 appReplicas: 2
-containerPort: 4200
+containerPort: 80
 containerEnvVars:
 - name: PORT
-  value: "4200"
+  value: "80"
+- name: Back
+  value: "back-codewarriors:8081"
 servicePort: 4200
 serviceType: LoadBalancer
