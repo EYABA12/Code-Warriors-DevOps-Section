@@ -12,5 +12,5 @@ containerEnvVars:
     value: "root"  # Nom d'utilisateur de la base de données
   - name: SPRING_DATASOURCE_PASSWORD
     value: "pfa2024"  # Mot de passe de la base de données
-servicePort: 8080  # Port exposé pour accéder au service depuis l'extérieur
+servicePort: 8085  # Port exposé pour accéder au service depuis l'extérieur
 serviceType: ClusterIP  # Type de service pour Kubernetes
