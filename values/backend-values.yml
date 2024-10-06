@@ -12,7 +12,5 @@ containerEnvVars:
     value: "root"  # Nom d'utilisateur de la base de données
   - name: SPRING_DATASOURCE_PASSWORD
     value: "pfa2024"  # Mot de passe de la base de données
-  - name: Front
-    value: "frontend-codewarriors:80"  # URL du service frontend
 servicePort: 8082  # Port exposé pour accéder au service depuis l'extérieur
 serviceType: ClusterIP  # Type de service pour Kubernetes
