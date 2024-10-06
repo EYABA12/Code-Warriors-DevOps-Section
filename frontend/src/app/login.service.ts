@@ -20,11 +20,11 @@ export class LoginService {
 
   constructor(private http: HttpClient,private router: Router) { }
   login(userObject:any): Observable<any> { // La fonction renvoie un tableau d'employés, donc il faut utiliser Observable<Employee[]>
-    return this.http.post<any>('http://localhost:4200/api/users/authenticate' ,userObject);
+    return this.http.post<any>(`api/users/authenticate` ,userObject);
   }
   
   signUp(userObject:any): Observable<any> { // La fonction renvoie un tableau d'employés, donc il faut utiliser Observable<Employee[]>
-    return this.http.post<any>('http://localhost:4200/api/users',userObject);
+    return this.http.post<any>(`api/users`,userObject);
   }
   getSubscribedUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:4200/api/users/subscribed');
