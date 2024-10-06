@@ -7,6 +7,6 @@ containerEnvVars:
 - name: PORT
   value: "80"
 - name: Back
-  value: "back-codewarriors:8083"
+  value: "back-codewarriors:8080"
 servicePort: 4200
 serviceType: LoadBalancer
