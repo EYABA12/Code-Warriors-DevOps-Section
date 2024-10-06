@@ -11,4 +11,4 @@ containerEnvVars:
     value: "pfa2024"  # Mot de passe root
   - name: MYSQL_DATABASE
     value: "CodeWarrior"  # Nom de la base de données
-servicePort: 3307
+servicePort: 3306
