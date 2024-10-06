@@ -22,7 +22,7 @@ FROM openjdk:17-alpine
 COPY --from=build /workspace/target/*.jar app.jar
 
 # Exposez le port de l'application
-EXPOSE 8080
+EXPOSE 8085
 
 # Commande pour lancer l'application
 ENTRYPOINT [ "java", "-jar", "/app.jar" ]
