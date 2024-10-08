@@ -1,4 +1,4 @@
-appName: frontend-codewarriorss
+appName: frontend-codewarriors
 appImage: eyabenamor949/code-warriors
 appVersion: latest
 appReplicas: 2

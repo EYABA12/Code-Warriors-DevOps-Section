@@ -9,14 +9,14 @@ spec:
         elements:
           - chartName: microservice
             repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-            path: kuberntes/microservice
-            values:
+            path: microservice
+            valueFiles:
               - backend-values.yml
               - frontend-values.yml
           - chartName: mysql
             repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-            path: kuberntes/mysql
-            values:
+            path: mysql
+            valueFiles:
               - values.yaml
   template:
     metadata:
@@ -28,13 +28,13 @@ spec:
         path: "{{path}}"
         helm:
           valueFiles:
-            - "{{values}}"
+            - "{{valueFiles}}"
       destination:
         server: https://kubernetes.default.svc
         namespace: default
       syncPolicy:
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
         automated:
           selfHeal: true
           prune: true
