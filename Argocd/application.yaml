@@ -9,10 +9,18 @@ spec:
   source:
     repoURL: https://github.com/EYABA12/code-warriors-pipline.git
     targetRevision: HEAD
-    path: kuberntes
+    path: kuberntes/
+    helm:
+      valueFiles:
+      - mysql/mysql-values.yaml
+      - microservice/frontend-value.yaml
+      - microservice/backend-value.yaml
+      parameters:
+      - name: replicaCount
+        value: "3"
   destination: 
     server: https://kubernetes.default.svc
-    namespace: myapp
+    namespace: default
 
   syncPolicy:
     syncOptions:
