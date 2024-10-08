@@ -1,40 +1,52 @@
+# Application pour MySQL
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
-  name: microservice-mysql-applicationset
+  name: mysql-application
   namespace: argocd
 spec:
-  generators:
-    - list:
-        elements:
-          - chartName: microservice
-            repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-            path: microservice
-            valueFiles:
-              - backend-values.yml
-              - frontend-values.yml
-          - chartName: mysql
-            repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-            path: mysql
-            valueFiles:
-              - values.yaml
-  template:
-    metadata:
-      name: "{{chartName}}-application"
-    spec:
-      project: default
-      source:
-        repoURL: "{{repoURL}}"
-        path: "{{path}}"
-        helm:
-          valueFiles:
-            - "{{valueFiles}}"
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: default
-      syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
-        automated:
-          selfHeal: true
-          prune: true
+  project: default
+  source:
+    repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    targetRevision: HEAD
+    path: kuberntes/mysql
+    helm:
+      valueFiles:
+      - ../values/mysql-values.yml
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+
+---
+
+# Application pour le microservice
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    targetRevision: HEAD
+    path: kuberntes/microservice
+    helm:
+      valueFiles:
+      - ../values/frontend-values.yml
+      - ../values/backend-values.yml
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
