@@ -1,31 +1,40 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: myapp-argo-application
+  name: microservice-mysql-applicationset
   namespace: argocd
 spec:
-  project: default
-
-  source:
-    repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-    targetRevision: HEAD
-    path: kuberntes/
-    helm:
-      valueFiles:
-      - mysql/mysql-values.yaml
-      - microservice/frontend-value.yaml
-      - microservice/backend-value.yaml
-      parameters:
-      - name: replicaCount
-        value: "3"
-  destination: 
-    server: https://kubernetes.default.svc
-    namespace: default
-
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-
-    automated:
-      selfHeal: true
-      prune: true
+  generators:
+    - list:
+        elements:
+          - chartName: microservice
+            repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+            path: kuberntes/microservice
+            values:
+              - frontend-values.yaml
+              - backend-values.yaml
+          - chartName: mysql
+            repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+            path: kuberntes/mysql
+            values:
+              - values.yaml
+  template:
+    metadata:
+      name: "{{chartName}}-application"
+    spec:
+      project: default
+      source:
+        repoURL: "{{repoURL}}"
+        path: "{{path}}"
+        helm:
+          valueFiles:
+            - "{{values}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        automated:
+          selfHeal: true
+          prune: true
