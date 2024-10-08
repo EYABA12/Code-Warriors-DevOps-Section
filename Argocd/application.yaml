@@ -11,8 +11,7 @@ spec:
             repoURL: https://github.com/EYABA12/code-warriors-pipline.git
             path: kuberntes/microservice
             values:
-              - frontend-values.yaml
-              - backend-values.yaml
+              - values.yaml
           - chartName: mysql
             repoURL: https://github.com/EYABA12/code-warriors-pipline.git
             path: kuberntes/mysql
