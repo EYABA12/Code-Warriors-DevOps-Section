@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: kuberntes
   destination:
-    server: awake-badger-k8s-844vc874.hcp.centralus.azmk8s.io
+    server: https://kubernetes.default.svc
     namespace: default
   syncPolicy:
     syncOptions:

@@ -29,17 +29,3 @@ spec:
       - name: mysql-persistent-storage  # Obtention du volume à partir de PVC
         persistentVolumeClaim:
           claimName: mysql-pv-claim  # Nom du PVC à utiliser
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv-claim
-  labels:
-    app: {{ .Values.appName }}
-    tier: database
-spec:
-  accessModes:
-    - ReadWriteOnce  # Mode d'accès pour le PVC
-  resources:
-    requests:
-      storage: 1Gi  # Capacité de stockage demandée
