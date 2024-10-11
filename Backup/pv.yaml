@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 1Gi  # Capacité de stockage du PV
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard  # Ceci doit correspondre à la StorageClass du PVC
+  hostPath:
+    path: /mnt/disks/mysql-data  # Chemin sur l'hôte où les données seront stockées

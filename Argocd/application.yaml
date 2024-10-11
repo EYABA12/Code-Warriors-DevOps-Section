@@ -1,20 +1,16 @@
-# Application pour MySQL
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mysql-application
+  name: app-of-apps
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/EYABA12/code-warriors-pipline.git
     targetRevision: HEAD
-    path: kuberntes/mysql
-    helm:
-      valueFiles:
-      - ../values/mysql-values.yml
-  destination: 
-    server: https://kubernetes.default.svc
+    path: kuberntes
+  destination:
+    server: awake-badger-k8s-844vc874.hcp.centralus.azmk8s.io
     namespace: default
   syncPolicy:
     syncOptions:
@@ -22,31 +18,23 @@ spec:
     automated:
       selfHeal: true
       prune: true
-
----
-
-# Application pour le microservice
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: microservice-application
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/EYABA12/code-warriors-pipline.git
-    targetRevision: HEAD
-    path: kuberntes/microservice
-    helm:
-      valueFiles:
-      - ../values/frontend-values.yml
-      - ../values/backend-values.yml
-  destination: 
-    server: https://kubernetes.default.svc
-    namespace: default
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
+  # Définir les sous-applications ici
+  sources:
+    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+      path: kuberntes/mysql
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - ../values/mysql-values.yml
+    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+      path: kuberntes/microservice
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - ../values/frontend-values.yml
+    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+      path: kuberntes/microservice
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - ../values/backend-values.yml

@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mysql-backup
+spec:
+  schedule: "*/2 * * * *"  # Exécute toutes les 2 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mysql-backup
+            image: mysql:5.7  # Ou une autre image qui contient les outils nécessaires
+            env:
+              - name: MYSQL_ROOT_PASSWORD
+                value: "pfa2024"  # Mot de passe root pour MySQL
+            command:
+              - /bin/sh
+              - -c
+              - |
+                # Supprimer l'ancienne sauvegarde, si elle existe
+                rm -f /mnt/disks/mysql-backup/backup.sql && \
+                # Créer un nouveau répertoire de sauvegarde
+                mkdir -p /mnt/disks/mysql-backup && \
+                # Effectuer la sauvegarde
+                mysqldump -h mysql -u root -p${MYSQL_ROOT_PASSWORD} --all-databases > /mnt/disks/mysql-backup/backup.sql
+            volumeMounts:
+              - name: mysql-persistent-storage
+                mountPath: /var/lib/mysql 
+                mountPath: /mnt/disks/mysql-backup e
+          restartPolicy: OnFailure
+          volumes:
+          - name: mysql-persistent-storage
+            persistentVolumeClaim:
+              claimName: mysql-pv-claimm 
+          - name: backup-storage
+            hostPath:
+              path: /mnt/disks/mysql-backup  
