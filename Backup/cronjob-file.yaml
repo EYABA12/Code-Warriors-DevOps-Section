@@ -3,36 +3,39 @@ kind: CronJob
 metadata:
   name: mysql-backup
 spec:
-  schedule: "*/2 * * * *"  # Exécute toutes les 2 minutes
+  schedule: "0 2 * * *" # Sauvegarde quotidienne à 2h du matin
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: mysql-backup
-            image: mysql:5.7  # Ou une autre image qui contient les outils nécessaires
-            env:
-              - name: MYSQL_ROOT_PASSWORD
-                value: "pfa2024"  # Mot de passe root pour MySQL
-            command:
-              - /bin/sh
-              - -c
-              - |
-                # Supprimer l'ancienne sauvegarde, si elle existe
-                rm -f /mnt/disks/mysql-backup/backup.sql && \
-                # Créer un nouveau répertoire de sauvegarde
-                mkdir -p /mnt/disks/mysql-backup && \
-                # Effectuer la sauvegarde
-                mysqldump -h mysql -u root -p${MYSQL_ROOT_PASSWORD} --all-databases > /mnt/disks/mysql-backup/backup.sql
-            volumeMounts:
-              - name: mysql-persistent-storage
-                mountPath: /var/lib/mysql 
-                mountPath: /mnt/disks/mysql-backup e
+            - name: mysql-backup
+              image: mcr.microsoft.com/azure-cli # Image contenant azcopy
+              env:
+                - name: MYSQL_ROOT_PASSWORD
+                  value: "pfa2024" # Mot de passe root pour MySQL
+                - name: MYSQL_DATABASE
+                  value: "CodeWarrior" # Nom de la base de données à sauvegarder
+                - name: AZURE_STORAGE_ACCOUNT
+                  value: "moncomptebackup" # Nom du compte de stockage Azure
+                - name: AZURE_STORAGE_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure-storage-secret # Nom de votre Secret
+                      key: value # Clé dans le Secret
+                - name: AZURE_CONTAINER_NAME
+                  value: "backup-container" # Nom du conteneur Blob Storage
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  mysqldump -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > /backup/backup-$(date +\%F).sql &&
+                  # Utilisation de azcopy pour copier vers Azure Blob Storage
+                  azcopy copy "/backup/backup-$(date +\%F).sql" "https://${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net/${AZURE_CONTAINER_NAME}/backup-$(date +\%F).sql" --recursive=true
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backup # Chemin où les fichiers de sauvegarde seront enregistrés
           restartPolicy: OnFailure
           volumes:
-          - name: mysql-persistent-storage
-            persistentVolumeClaim:
-              claimName: mysql-pv-claimm 
-          - name: backup-storage
-            hostPath:
-              path: /mnt/disks/mysql-backup  
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: mysql-backup-pv-claimm # PVC utilisé pour stocker les sauvegardes temporairement

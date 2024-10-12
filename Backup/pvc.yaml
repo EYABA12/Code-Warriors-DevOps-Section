@@ -1,17 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claimm
-
-  labels:
-    app: my-app  # Remplacez par le nom de votre application
-    tier: database
+  name: mysql-backup-pv-claimm
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: managed-disk  # Doit correspondre à celle du PV
-
+      storage: 10Gi
 
