@@ -28,4 +28,4 @@ spec:
       volumes:
       - name: mysql-persistent-storage  # Obtention du volume à partir de PVC
         persistentVolumeClaim:
-          claimName: mysql-pv-claim  # Nom du PVC à utiliser
+          claimName: mysql-pv-claimm  # Nom du PVC à utiliser

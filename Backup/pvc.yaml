@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claimm
+
   labels:
     app: my-app  # Remplacez par le nom de votre application
     tier: database
@@ -11,7 +12,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  volumeName: mysql-pv  # Si vous utilisez un PV spécifique
-  storageClassName: standard  # Doit correspondre à celle du PV
+  storageClassName: managed-disk  # Doit correspondre à celle du PV
 
 
