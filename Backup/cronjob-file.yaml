@@ -38,4 +38,4 @@ spec:
           volumes:
             - name: backup-storage
               persistentVolumeClaim:
-                claimName: mysql-backup-pv-claimm # PVC utilisé pour stocker les sauvegardes temporairement
+                claimName:  mysql-pv-claimm # PVC utilisé pour stocker les sauvegardes temporairement
