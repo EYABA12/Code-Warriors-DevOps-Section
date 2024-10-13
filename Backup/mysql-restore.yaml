@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-restore
+  namespace: default
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: download-from-azure
+        image: mcr.microsoft.com/azure-cli
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            # Télécharger le fichier de sauvegarde depuis Azure
+            az storage blob download --account-name "$AZURE_STORAGE_ACCOUNT" --account-key "$AZURE_STORAGE_KEY" --container-name "$AZURE_CONTAINER_NAME" --name backup-$(date +%F).sql --file /backup/backup-$(date +%F).sql
+        env:
+          - name: AZURE_STORAGE_ACCOUNT
+            value: "moncomptebackup"
+          - name: AZURE_STORAGE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: azure-storage-secret
+                key: value
+          - name: AZURE_CONTAINER_NAME
+            value: "backup-container"
+        volumeMounts:
+          - name: backup-storage
+            mountPath: /backup
+
+      - name: mysql-restore
+        image: mysql:5.7
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            # Attendre que le fichier de sauvegarde soit disponible
+            until [ -f /backup/backup-$(date +%F).sql ]; do echo "Waiting for backup file..."; sleep 5; done
+            # Restaurer la base de données
+            mysql -h mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < /backup/backup-$(date +%F).sql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "pfa2024"  # Remplacez par le mot de passe réel
+          - name: MYSQL_DATABASE
+            value: "CodeWarrior"  # Remplacez par le nom de votre base de données
+        volumeMounts:
+          - name: backup-storage
+            mountPath: /backup
+
+      volumes:
+        - name: backup-storage
+          emptyDir: {}  # Vous pouvez remplacer par un volume persistant si nécessaire

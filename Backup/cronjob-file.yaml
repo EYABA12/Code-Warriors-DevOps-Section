@@ -2,40 +2,49 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mysql-backup
+  namespace: default
 spec:
-  schedule: "0 2 * * *" # Sauvegarde quotidienne à 2h du matin
+  schedule:  "0 */2 * * *"
   jobTemplate:
     spec:
       template:
         spec:
+          restartPolicy: OnFailure
           containers:
             - name: mysql-backup
-              image: mcr.microsoft.com/azure-cli # Image contenant azcopy
-              env:
-                - name: MYSQL_ROOT_PASSWORD
-                  value: "pfa2024" # Mot de passe root pour MySQL
-                - name: MYSQL_DATABASE
-                  value: "CodeWarrior" # Nom de la base de données à sauvegarder
-                - name: AZURE_STORAGE_ACCOUNT
-                  value: "moncomptebackup" # Nom du compte de stockage Azure
-                - name: AZURE_STORAGE_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: azure-storage-secret # Nom de votre Secret
-                      key: value # Clé dans le Secret
-                - name: AZURE_CONTAINER_NAME
-                  value: "backup-container" # Nom du conteneur Blob Storage
+              image: mysql:5.7
               command: ["/bin/sh", "-c"]
               args:
                 - |
-                  mysqldump -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > /backup/backup-$(date +\%F).sql &&
-                  # Utilisation de azcopy pour copier vers Azure Blob Storage
-                  azcopy copy "/backup/backup-$(date +\%F).sql" "https://${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net/${AZURE_CONTAINER_NAME}/backup-$(date +\%F).sql" --recursive=true
+                  mysqldump -h mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > /backup/backup-$(date +%F).sql
+              env:
+                - name: MYSQL_ROOT_PASSWORD
+                  value: "pfa2024"
+                - name: MYSQL_DATABASE
+                  value: "CodeWarrior"
               volumeMounts:
                 - name: backup-storage
-                  mountPath: /backup # Chemin où les fichiers de sauvegarde seront enregistrés
-          restartPolicy: OnFailure
+                  mountPath: /backup
+            - name: upload-to-azure
+              image: mcr.microsoft.com/azure-cli
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  az storage blob upload --account-name "moncomptebackup" --account-key "$AZURE_STORAGE_KEY" --container-name "backup-container" --name backup-$(date +%F).sql --file /backup/backup-$(date +%F).sql
+
+              env:
+                - name: AZURE_STORAGE_ACCOUNT
+                  value: "moncomptebackup"
+                - name: AZURE_STORAGE_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure-storage-secret
+                      key: value
+                - name: AZURE_CONTAINER_NAME
+                  value: "backup-container"
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backup
           volumes:
             - name: backup-storage
-              persistentVolumeClaim:
-                claimName:  mysql-pv-claimm # PVC utilisé pour stocker les sauvegardes temporairement
+              emptyDir: {}
