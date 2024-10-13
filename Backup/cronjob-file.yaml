@@ -4,7 +4,6 @@ metadata:
   name: mysql-backup
   namespace: default
 spec:
-  schedule:  "0 */2 * * *"
   jobTemplate:
     spec:
       template:
@@ -31,7 +30,6 @@ spec:
               args:
                 - |
                   az storage blob upload --account-name "moncomptebackup" --account-key "$AZURE_STORAGE_KEY" --container-name "backup-container" --name backup-$(date +%F).sql --file /backup/backup-$(date +%F).sql
-
               env:
                 - name: AZURE_STORAGE_ACCOUNT
                   value: "moncomptebackup"
@@ -47,4 +45,5 @@ spec:
                   mountPath: /backup
           volumes:
             - name: backup-storage
-              emptyDir: {}
+              persistentVolumeClaim:
+                claimName: backup-pvc  # Utilisez le PVC ici
