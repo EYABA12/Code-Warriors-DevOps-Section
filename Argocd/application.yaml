@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    repoURL: https://github.com/EYABA12/clusterAks-code-warriors.git
     targetRevision: HEAD
     path: kuberntes 
   destination:
@@ -20,19 +20,19 @@ spec:
       prune: true
   # Définir les sous-applications ici
   sources:
-    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    - repoURL: https://github.com/EYABA12/clusterAks-code-warriors.git
       path: kuberntes/mysql
       targetRevision: HEAD
       helm:
         valueFiles:
         - ../values/mysql-values.yml
-    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    - repoURL: https://github.com/EYABA12/clusterAks-code-warriors.git
       path: kuberntes/microservice
       targetRevision: HEAD
       helm:
         valueFiles:
         - ../values/frontend-values.yml
-    - repoURL: https://github.com/EYABA12/code-warriors-pipline.git
+    - repoURL: https://github.com/EYABA12/clusterAks-code-warriors.git
       path: kuberntes/microservice
       targetRevision: HEAD
       helm:
