@@ -54,10 +54,15 @@ pipeline {
 
                         sh """
                         docker tag eyabenamor949/code-warriors eyabenamor949/code-warriors:${buildTag}
+                        docker tag eyabenamor949/code-warriors eyabenamor949/code-warriors:latest
+
                         """
 
                         sh """
                         docker push eyabenamor949/code-warriors:${buildTag}
+                        docker push eyabenamor949/code-warriors:latest
+
+
                         """
                     }
                 }
@@ -76,10 +81,14 @@ pipeline {
 
                         sh """
                         docker tag eyabenamor949/code-warriors-backend eyabenamor949/code-warriors-backend:${buildTag}
+                        docker tag eyabenamor949/code-warriors-backend eyabenamor949/code-warriors-backend:latest
+
                         """
 
                         sh """
                         docker push eyabenamor949/code-warriors-backend:${buildTag}
+                        docker push eyabenamor949/code-warriors-backend:latest
+
                         """
                     }
                 }

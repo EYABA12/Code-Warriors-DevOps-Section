@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/EYABA12/code-warriors-pipline.git
     targetRevision: HEAD
-    path: kuberntes
+    path: kuberntes 
   destination:
     server: https://kubernetes.default.svc
     namespace: default
