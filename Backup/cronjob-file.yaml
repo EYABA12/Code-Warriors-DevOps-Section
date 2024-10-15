@@ -4,6 +4,7 @@ metadata:
   name: mysql-backup
   namespace: default
 spec:
+  schedule: "0 0 * * *"  # Exécute la tâche tous les jours à minuit
   jobTemplate:
     spec:
       template:
@@ -18,7 +19,7 @@ spec:
                   mysqldump -h mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > /backup/backup-$(date +%F).sql
               env:
                 - name: MYSQL_ROOT_PASSWORD
-                  value: "pfa2024"
+                  value: "pfa2024"  # Remplacez par une méthode sécurisée pour un environnement de production
                 - name: MYSQL_DATABASE
                   value: "CodeWarrior"
               volumeMounts:
@@ -37,7 +38,7 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: azure-storage-secret
-                      key: value
+                      key: cle
                 - name: AZURE_CONTAINER_NAME
                   value: "backup-container"
               volumeMounts:
@@ -46,4 +47,5 @@ spec:
           volumes:
             - name: backup-storage
               persistentVolumeClaim:
-                claimName: backup-pvc  # Utilisez le PVC ici
+                claimName: backup-pvc  # Utilisez le PVC existant pour le stockage
+

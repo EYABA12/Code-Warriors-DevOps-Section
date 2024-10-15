@@ -6,15 +6,19 @@ metadata:
 spec:
   template:
     spec:
-      restartPolicy: Never
+      restartPolicy: OnFailure
       containers:
       - name: download-from-azure
         image: mcr.microsoft.com/azure-cli
         command: ["/bin/sh", "-c"]
         args:
           - |
+            # Lister les blobs et récupérer le dernier fichier de sauvegarde
+            BLOB_NAME=$(az storage blob list --account-name "moncomptebackup" --account-key "$AZURE_STORAGE_KEY" --container-name "backup-container" --query "[?starts_with(name, 'backup-')].name" -o tsv | sort -r | head -n 1)
             # Télécharger le fichier de sauvegarde depuis Azure
-            az storage blob download --account-name "$AZURE_STORAGE_ACCOUNT" --account-key "$AZURE_STORAGE_KEY" --container-name "$AZURE_CONTAINER_NAME" --name backup-$(date +%F).sql --file /backup/backup-$(date +%F).sql
+            az storage blob download --account-name "moncomptebackup" --account-key "$AZURE_STORAGE_KEY" --container-name "backup-container" --name "$BLOB_NAME" --file "/backup/$BLOB_NAME"
+            # Sauvegarder le nom du blob dans un fichier temporaire
+            echo "$BLOB_NAME" > /backup/blob_name.txt
         env:
           - name: AZURE_STORAGE_ACCOUNT
             value: "moncomptebackup"
@@ -35,18 +39,21 @@ spec:
         args:
           - |
             # Attendre que le fichier de sauvegarde soit disponible
-            until [ -f /backup/backup-$(date +%F).sql ]; do echo "Waiting for backup file..."; sleep 5; done
-            # Restaurer la base de données
-            mysql -h mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < /backup/backup-$(date +%F).sql
+            until [ -f /backup/blob_name.txt ]; do echo "Waiting for blob name file..."; sleep 5; done
+            # Lire le nom du fichier de sauvegarde
+            BLOB_NAME=$(cat /backup/blob_name.txt)
+            # Restaurer la base de données MySQL
+            mysql -h mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < /backup/$BLOB_NAME
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: "pfa2024"  # Remplacez par le mot de passe réel
+            value: "pfa2024"  # Remplacez ceci par une méthode sécurisée dans un environnement de production
           - name: MYSQL_DATABASE
-            value: "CodeWarrior"  # Remplacez par le nom de votre base de données
+            value: "CodeWarrior"
         volumeMounts:
           - name: backup-storage
             mountPath: /backup
 
       volumes:
         - name: backup-storage
-          emptyDir: {}  # Vous pouvez remplacer par un volume persistant si nécessaire
+          persistentVolumeClaim:
+            claimName: backup-pvcc  # Assurez-vous que ce PVC existe
