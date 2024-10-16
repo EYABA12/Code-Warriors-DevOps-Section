@@ -25,8 +25,7 @@ learning by enabling users to share their ideas, ask questions, and explore comp
  **Test1**: Data recovery test using the backup.
  
           - The current database is stored in "moncomptebackup."
-          
-          ![Project Architecture](TEST2/1.png) 
+           ![Project Architecture](TEST2/1.png) 
           
           ![Project Architecture](TEST2/7.png) 
 
