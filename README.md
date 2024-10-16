@@ -20,12 +20,18 @@ learning by enabling users to share their ideas, ask questions, and explore comp
  **Test1**: Data recovery test using the backup.
           - The current database is stored in "moncomptebackup."
           ![Project Architecture](TEST2/1.png) <!-- Replace with the link to your architecture image -->
+          ![Project Architecture](TEST2/7.png) <!-- Replace with the link to your architecture image -->
 
-          - Simulate a failure by deleting the cluster.
+          - Simulate a failure by deleting the cluster
           - After rebuilding the cluster, we notice that the data is missing.
+            ![Project Architecture](TEST2/3.png) <!-- Replace with the link to your architecture image -->
+
           - Run the script to restore the data from the backup stored in "moncomptebackup."
+            ![Project Architecture](TEST2/5.png) <!-- Replace with the link to your architecture image -->
+
           - The data is successfully restored in the cluster.
-         
+            ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
+
          
 
          
