@@ -41,9 +41,8 @@ Creation of an interactive website where learners can exchange their experiences
 
 - **The data is successfully restored in the cluster**.
   ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
-  **Test 2:**
-  We will test how, when a developer changes something in the code and simply pushes the changes, everything updates automatically using a webhook.
-  The CI pipeline in Jenkins will execute automatically, and ArgoCD will synchronize with Git, applying the modifications to the application in the cluster.
+  **Test 2:** Click on the image to watch the video.
+
   [![Watch the video](TEST1/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
   
