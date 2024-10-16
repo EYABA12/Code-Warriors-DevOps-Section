@@ -41,7 +41,7 @@ Creation of an interactive website where learners can exchange their experiences
 
 - **The data is successfully restored in the cluster**.
   ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
-  **Test 2:** Click on the image to watch the video.
+  # Test 2: **Click on the image to watch the video.**
 
   [![Watch the video](TEST1/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
