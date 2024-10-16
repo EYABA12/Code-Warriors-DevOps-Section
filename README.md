@@ -20,7 +20,7 @@ Creation of an interactive website where learners can exchange their experiences
 
 **Implementation of a GitOps approach for continuous delivery with ArgoCD.**
 
-**Backup Management:** Setting up database backups with scheduled automation using cron jobs.
+**Backup Management:Setting up database backups with scheduled automation using cron jobs.**
 
 # Test 1: ** Data recovery test using the backup.
 
