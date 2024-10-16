@@ -22,8 +22,10 @@ Creation of an interactive website where learners can exchange their experiences
 
 **Backup Management:** Setting up database backups with scheduled automation using cron jobs.
 
-**Test 1:** Data recovery test using the backup.
-  [![Watch the video](TEST2/7.png)]([https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://www.canva.com/design/DAGTuZsk8PI/LlBGcU21A2yVHhwdSTotJg/edit?utm_content=DAGTuZsk8PI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton))
+**Test 1:** Data recovery test using the backup.**Click on the image to watch the video.**
+
+  
+  [![Watch the video](TEST2/7.png)](https://www.canva.com/design/DAGTuZsk8PI/LlBGcU21A2yVHhwdSTotJg/edit?utm_content=DAGTuZsk8PI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
   # Test 2: **Click on the image to watch the video.**
 
