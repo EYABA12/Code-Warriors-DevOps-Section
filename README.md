@@ -1,43 +1,43 @@
 # About the project
-Creation of an interactive website where learners can exchange their experiences and knowledge. The objective is to promote collaborative
-learning by enabling users to share their ideas, ask questions, and explore computer science challenges together.
- ## Built with
+Creation of an interactive website where learners can exchange their experiences and knowledge. The objective is to promote collaborative learning by enabling users to share their ideas, ask questions, and explore computer science challenges together.
+
+## Built with
 - **Front-End:** Angular, Bootstrap, TypeScript.
-- **Backend:** Spring Boot
-- **DataBases:** Mysql.
-- ## Demo
+- **Back-End:** Spring Boot.
+- **Database:** MySQL.
+
+## Demo
 [![Watch the video](https://github.com/EYABA12/code-warriors/blob/master/screenshot.PNG)](https://vimeo.com/manage/videos/943214153/privacy)
-## Devops
-**Implementation of a CI pipeline with Jenkins to automate deployment.**.
+
+## DevOps
+**Implementation of a CI pipeline with Jenkins to automate deployment.**
 
 **Integration of tests in CI with SonarQube to analyze code quality.**
 
-**Configuration and management of a Kubernetes cluster using Kubernetes and 
- Helm Charts.**
- 
- **Configuration of remote state in Azure to avoid conflicts, ensuring that all users .
- always have the latest version of infrastructure configurations.**.
- 
- **Implementation of a GitOps approach for continuous delivery with ArgoCD**
- 
- **Backup Management: Setting up database backups with scheduled automation using cron jobs.**
- 
- **Test1**: Data recovery test using the backup.
- 
-          - The current database is stored in "moncomptebackup."
-           ![Project Architecture](TEST2/1.png) 
-          
-          ![Project Architecture](TEST2/7.png) 
+**Configuration and management of a Kubernetes cluster using Kubernetes and Helm Charts.**
 
-          - Simulate a failure by deleting the cluster
-          - After rebuilding the cluster, we notice that the data is missing.
-            ![Project Architecture](TEST2/3.png) <!-- Replace with the link to your architecture image -->
+**Configuration of remote state in Azure to avoid conflicts, ensuring that all users always have the latest version of infrastructure configurations.**
 
-          - Run the script to restore the data from the backup stored in "moncomptebackup."
-            ![Project Architecture](TEST2/5.png) <!-- Replace with the link to your architecture image -->
+**Implementation of a GitOps approach for continuous delivery with ArgoCD.**
 
-          - The data is successfully restored in the cluster.
-            ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
+**Backup Management:** Setting up database backups with scheduled automation using cron jobs.
+
+**Test 1:** Data recovery test using the backup.
+
+- The current database is stored in "moncomptebackup."
+  ![Project Architecture](TEST2/1.png) 
+  ![Project Architecture](TEST2/7.png)
+
+- Simulate a failure by deleting the cluster.
+- After rebuilding the cluster, we notice that the data is missing.
+  ![Project Architecture](TEST2/3.png) <!-- Replace with the link to your architecture image -->
+
+- Run the script to restore the data from the backup stored in "moncomptebackup."
+  ![Project Architecture](TEST2/5.png) <!-- Replace with the link to your architecture image -->
+
+- The data is successfully restored in the cluster.
+  ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
+
 
          
 
