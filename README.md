@@ -23,24 +23,8 @@ Creation of an interactive website where learners can exchange their experiences
 **Backup Management:** Setting up database backups with scheduled automation using cron jobs.
 
 **Test 1:** Data recovery test using the backup.
+  [![Watch the video](TEST2/7.png)]([https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://www.canva.com/design/DAGTuZsk8PI/LlBGcU21A2yVHhwdSTotJg/edit?utm_content=DAGTuZsk8PI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton))
 
-- **We have this data in our cluster.**
-  
-  ![Project Architecture](TEST2/1.png)
- - **The current database is stored in "moncomptebackup."**
-  ![Project Architecture](TEST2/7.png)
-
-- **Simulate a failure by deleting the cluster.**
- 
-- **After rebuilding the cluster, we notice that the data is missing.**
-- 
-  ![Project Architecture](TEST2/3.png) <!-- Replace with the link to your architecture image -->
-
-- **Run the script to restore the data from the backup stored in "moncomptebackup."**
-  ![Project Architecture](TEST2/5.png) <!-- Replace with the link to your architecture image -->
-
-- **The data is successfully restored in the cluster**.
-  ![Project Architecture](TEST2/6.png) <!-- Replace with the link to your architecture image -->
   # Test 2: **Click on the image to watch the video.**
 
   [![Watch the video](TEST1/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
