@@ -44,7 +44,7 @@ Creation of an interactive website where learners can exchange their experiences
   **Test 2:**
   We will test how, when a developer changes something in the code and simply pushes the changes, everything updates automatically using a webhook.
   The CI pipeline in Jenkins will execute automatically, and ArgoCD will synchronize with Git, applying the modifications to the application in the cluster.
-  [![Watch the video](TEST2/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+  [![Watch the video](TEST1/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
   
 
