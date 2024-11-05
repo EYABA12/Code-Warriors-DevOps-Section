@@ -27,7 +27,7 @@ Creation of an interactive website where learners can exchange their experiences
 **Click on the image to watch the video.**
 
   
-  [![Watch the video](TEST2/7.png)](https://vimeo.com/1026317830)
+  [![Watch the video](TEST2/7.png)]([https://vimeo.com/1026317830](https://vimeo.com/manage/videos/1026499801))
 
   # Test 2: **Click on the image to watch the video.**
 
