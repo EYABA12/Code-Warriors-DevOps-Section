@@ -34,11 +34,7 @@ Creation of an interactive website where learners can exchange their experiences
 
   [![Watch the video](TEST1/1.png)](https://vimeo.com/1026327529)
 
-# Test 3 :**Recovery of Terraform State File from Azure Blob Storag**
-  **Click on the image to watch the video.**
 
-  [![Watch the video](tfstate.png)]([https://www.canva.com/design/DAGTuU045aU/lQxdoDVuH2KFZb7DUPREgQ/edit?utm_content=DAGTuU045aU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://vimeo.com/manage/videos/1026499801)
-)
 
          
 
