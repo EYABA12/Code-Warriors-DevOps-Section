@@ -27,11 +27,11 @@ Creation of an interactive website where learners can exchange their experiences
 **Click on the image to watch the video.**
 
   
-  [![Watch the video](TEST2/7.png)](https://www.canva.com/design/DAGTuZsk8PI/LlBGcU21A2yVHhwdSTotJg/edit?utm_content=DAGTuZsk8PI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+  [![Watch the video](TEST2/7.png)](https://vimeo.com/1026317830)
 
   # Test 2: **Click on the image to watch the video.**
 
-  [![Watch the video](TEST1/1.png)](https://www.canva.com/design/DAGTuHviHnM/YTkFrU2k5If_ggLOK16vUw/edit?utm_content=DAGTuHviHnM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+  [![Watch the video](TEST1/1.png)](https://vimeo.com/1026327529)
 
 # Test 3 :**Recovery of Terraform State File from Azure Blob Storag**
   **Click on the image to watch the video.**
