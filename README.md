@@ -29,7 +29,8 @@ Creation of an interactive website where learners can exchange their experiences
   
   [![Watch the video](TEST2/7.png)](https://vimeo.com/manage/videos/1026499801)
 
-  # Test 2: **Click on the image to watch the video.**
+  # Test 2:** Automated Deployment with Jenkins and Argo CD **
+  **Click on the image to watch the video.**
 
   [![Watch the video](TEST1/1.png)](https://vimeo.com/1026327529)
 
