@@ -22,7 +22,7 @@ Creation of an interactive website where learners can exchange their experiences
 
 **Backup Management:Setting up database backups with scheduled automation using cron jobs.**
 
-# Test 1: ** Data recovery test using the backup.
+# Test 1: **Data restoration procedure in case of a cluster failure.
 
 **Click on the image to watch the video.**
 
